@@ -16,17 +16,17 @@ class MandrillClientSingleton:
 
 class Message:
 
-    def __init__(self, recipient, from_email, html):
-        self._recipient = recipient
-        self._from_email = from_email
-        self._html = html
+    def __init__(self, **kwargs):
+        self._recipient = kwargs['recipient']
+        # self._from_email = kwargs['from_email']
+        self._html = kwargs['html']
 
     def build_message(self):
         return {
             'to': [{'email': self._recipient}],
             'subject': "Letter to the editor",
             'html': self._html,
-            'from_email': self._from_email,
+            'from_email': "anna@duosecurity.com",
             'headers': {
                 'Reply-To': 'beverly.a.lau@gmail.com'
             }
@@ -36,7 +36,6 @@ class Message:
         message = self.build_message()
         mandrill_response = MandrillClientSingleton().client.messages.send(message=message)
         print(mandrill_response)
-
 
 # emails = ['vpatton@sfmediaco.com',
 #           'ccnletters@bayareanewsgroup.com',
@@ -60,10 +59,13 @@ class Message:
 emails = ['nuxoll.anna@gmail.com',
           'beverly.a.lau@gmail.com']
 
-from_email = 'beverly@karmiclabs.com'
-html = 'lalalallalalal'
+input_from_email = 'beverly@karmiclabs.com'
+input_html = 'lalalallalalal'
+
 for email in emails:
-    m = Message(email, from_email, html)
+    m = Message(recipient=email, html=input_html)
     m.send()
 
+# receipt email, email body includes list of emails it was sent to
+# m = Message(recipient=person_who_sent_it, html=input_html)
 

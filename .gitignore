@@ -5,3 +5,5 @@ bin/
 lib/
 pyvenv.cfg
 config.py
+config.pyc
+venv/
