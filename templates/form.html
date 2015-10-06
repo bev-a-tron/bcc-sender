@@ -1,0 +1,49 @@
+<!doctype html>
+<head>
+    <title>Send letters to the editor</title>
+</head>
+
+
+<body>
+
+<link rel=stylesheet type=text/css href='{{ url_for('static',filename='style.css')}}'>
+<div class=page>
+    <h1>Compose your letter to the editor</h1>
+
+    <div class=metanav>
+    </div>
+
+        <div>
+            Why should readers pay attention to Larry Lessig?
+        </div>
+
+        <br>
+        <br>
+
+        <div>
+            Instructions:
+            <ol>
+                <li>Change the letter, type your name as a signature</li>
+                <li>Pick newspapers to email to</li>
+                <li>Click send!</li>
+            </ol>
+        </div>
+
+        <form id='letter' method='post' action='submit'>
+            <label>
+                Name: <input type='text' name="user_name" size="30" placeholder="First and last name" required/><br><br>
+                Email: <input type='email' name="user_email" size="30" placeholder="Your email address" required/><br><br>
+                <textarea name="user_letter" cols="80" rows="20" placeholder="Enter some text">{{ example_letter }}</textarea>
+                <br>
+                {% for newspaper, email in emails.items() %}
+                <input type="checkbox" name="{{ email }}"/> {{ email }} ({{newspaper}})<br>
+                {% endfor %}
+                <br>
+                <input type='submit' value='Submit'/>
+            </label>
+        </form>
+
+</div>
+
+</body>
+

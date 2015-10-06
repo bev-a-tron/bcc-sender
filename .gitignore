@@ -7,3 +7,5 @@ pyvenv.cfg
 config.py
 config.pyc
 venv/
+__pycache__
+emails.py
