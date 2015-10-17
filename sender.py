@@ -28,12 +28,9 @@ class Message:
         return {
             'to': [{'email': self._recipient}],
             'subject': "Letter to the editor of " + self._newspaper_name,
-            'html': self._html,
+            'text': self._html,
             'from_email': self._from_email,
-            'from_name': self._from_name,
-            'headers': {
-                'Reply-To': 'beverly.a.lau@gmail.com'
-            }
+            'from_name': self._from_name
         }
 
     def send(self):

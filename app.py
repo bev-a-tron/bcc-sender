@@ -28,22 +28,23 @@ def index():
 @app.route('/submit', methods=['POST'])
 def submit():
     letter = request.form['user_letter']
-    name = request.form['user_name']
-    email = request.form['user_email']
+    from_name = request.form['user_name']
+    from_email = request.form['user_email']
 
-    e = emails.TEST_SOURCES
+    sources = emails.TEST_SOURCES.copy()
 
     # super hacky hack
     things_to_delete = []
-    for name, email in e.items():
-        if request.form.get(name) is not 'on':
-            things_to_delete.append(name)
+    for newspaper_name, newspaper_email in sources.items():
+        if request.form.get(newspaper_email) != 'on':
+            things_to_delete.append(newspaper_name)
 
     for key in things_to_delete:
-        del e[key]
+        del sources[key]
 
-    make_and_send_emails(sources=e, from_email=email, from_name=name, html=letter)
-    return render_template('end.html', emails=e)
+    make_and_send_emails(sources=sources, from_email=from_email, from_name=from_name, html=letter)
+
+    return render_template('end.html', emails=sources)
 
 if __name__ == '__main__':
     app.run(debug=True)

@@ -16,9 +16,13 @@
 
         <div>
             Emails were sent to:
+            <ul style="list-style-type:none">
             {% for newspaper, email in emails.items() %}
-            {{ email }} ({{newspaper}})
+            <li>{{ email }} ({{newspaper}})</li>
             {% endfor %}
+            </ul>
+    </div>
+    <div>
 
     </div>
 </div>
