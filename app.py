@@ -1,3 +1,4 @@
+# -*- coding: utf-8 -*-
 import emails
 from flask import Flask, render_template, request
 from sender import make_and_send_emails
